@@ -1,6 +1,8 @@
 ﻿using MarsFramework.Global;
 using OpenQA.Selenium;
+using NUnit.Framework;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Threading;
 
 namespace MarsFramework.Pages
 {
@@ -22,6 +24,9 @@ namespace MarsFramework.Pages
         //Delete the listing
         [FindsBy(How = How.XPath, Using = "//table[1]/tbody[1]")]
         private IWebElement delete { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = "//button[@class='ui icon positive right labeled button']")]
+        private IWebElement confirmDeleteButton { get; set; }
 
         //Edit the listing
         [FindsBy(How = How.XPath, Using = "(//i[@class='outline write icon'])[1]")]
@@ -36,23 +41,25 @@ namespace MarsFramework.Pages
             //Populate the Excel Sheet
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ManageListings");
 
-
         }
 
-        public void Visualize()
+        internal void Visualize()
         {
-            view.Click();
+           manageListingsLink.Click();
+            Thread.Sleep(3);
         }
-        public void Edit()
+        internal void EditBtn()
         {
             update.Click(); 
         }
-        public void Delete()
+        internal void DeleteBtn()
         {
             delete.Click();
+            confirmDeleteButton.Click();
+            Thread.Sleep(2000);
         }
 
-        public void ClickActionBtn()
+        internal void ClickActionBtn()
         {
             clickActionsButton.Click();
         }

@@ -4,7 +4,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
 using RelevantCodes.ExtentReports;
 using System;
 using static MarsFramework.Global.GlobalDefinitions;
@@ -16,9 +15,10 @@ namespace MarsFramework.Global
         #region To access Path from resource file
 
         public static int Browser = int.Parse(MarsResource.Browser);
-        public static string ExcelPath = MarsResource.ExcelPath;
-        public static string ScreenshotPath = "C:/Users/dell/source/repos/CompetitionTask/your path/";
-        public static string ReportPath = MarsResource.ReportPath;
+        public static string ExcelPath = "C:/Users/dell/source/repos/CompetitionTask/MarsFramework/ExcelData/TestData.xlsx";
+        public static string ScreenshotPath = MarsResource.ScreenShotPath;
+        public static string ReportPath = @"C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\MarsReports.html";
+        public string BaseUrl = "http://localhost:5000/";
         #endregion
 
         #region reports
@@ -30,18 +30,22 @@ namespace MarsFramework.Global
         [SetUp]
         public void Inititalize()
         {
+            //initialize browser
+            InitializeBrowser(Browser);
+            driver.Navigate().GoToUrl(BaseUrl);
 
-            switch (Browser)
-            {
+            //switch (Browser)
+            //{
 
-                case 1:
-                    GlobalDefinitions.driver = new EdgeDriver();
-                    break;
-                case 2:
-                    GlobalDefinitions.driver = new ChromeDriver();
-                    GlobalDefinitions.driver.Manage().Window.Maximize();
-                    break;
-            }
+            //    case 1:
+            //        GlobalDefinitions.driver = new EdgeDriver();
+            //        break;
+            //    case 2:
+            //        GlobalDefinitions.driver = new ChromeDriver();
+            //        GlobalDefinitions.driver.Manage().Window.Maximize();
+            //        break;
+            //}
+            
 
             #region Initialise Reports
 
@@ -53,7 +57,7 @@ namespace MarsFramework.Global
             if (MarsResource.IsLogin == "true")
             {
                 SignIn loginobj = new SignIn();
-                loginobj.LoginSteps(driver);
+                loginobj.LoginSteps();
             }
             else
             {

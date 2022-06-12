@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Threading;
+using MarsFramework.Global;
+using OpenQA.Selenium.Support.UI;
 
 namespace MarsFramework.Pages
 {
@@ -10,6 +12,7 @@ namespace MarsFramework.Pages
         public ShareSkill()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ShareSkill");
         }
 
         //Click on ShareSkill Button
@@ -109,56 +112,128 @@ namespace MarsFramework.Pages
 
         //Click on Save button
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
-        private IWebElement Save { get; set; }
+        private IWebElement SaveBtn { get; set; }
 
         public void EnterShareSkill()
         {
-            ShareSkillButton.Click();
-            Thread.Sleep(3000);
-            Title.SendKeys("QA Analyst");
-            Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data.");
-            CategoryDropDown.Click();
-            programming_TechOpt.Click();
-            SubCategoryDropDown.Click();
-            qaOpt.Click();
-            Tags.SendKeys("qa");
+            Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
+            Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Description"));
+
+            //Select Category and Subcategory dropdown list
+            new SelectElement(CategoryDropDown).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Category"));
+            new SelectElement(SubCategoryDropDown).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "SubCategory"));
+
+            // Type in Tag and click enter
+            Tags.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Tags"));
             Tags.SendKeys(Keys.Enter);
-            ServiceTypeOption1.Click();
-            LocationTypeOption2.Click();
-            StartDateDropDown.SendKeys("01012023");
-            EndDateDropDown.SendKeys("01012024");
+
+            //Select Service Type 
+            ServiceType();
+
+            //Select Location Type
+            LocationType();
+
+            //Select start date
+            StartDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Startdate"));
+
+            //Select end date
+            EndDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Enddate"));
+
+            //Select day
             Day1.Click();
-            SkillTradeOption2.Click();
-            CreditAmount.SendKeys("10");
-            ActiveOption.Click();
-            Save.Click();
 
+            //Type in Start time and End time
+            StartTimeDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Starttime"));
+            EndTimeDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Endtime"));
 
-        }
-
-        public void EditShareSkill()
-        {
-            Title.Clear();
-            Title.SendKeys("QA AnalystUpdate");
-            Description.Clear();
-            Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data. I also have experience in test automation.");
-            Tags.Click();
-            Tags.SendKeys("automation");
-            Tags.SendKeys(Keys.Enter);
-            ServiceTypeOption2.Click();
-            LocationTypeOption1.Click();
-            StartDateDropDown.SendKeys("01012024");
-            EndDateDropDown.SendKeys("01012025");
-            Day1.Click();
-            Day2.Click();
-            Day3.Click();
+            //Select Skill trade option
             SkillTradeOption1.Click();
-            SkillExchange.Click();
-            SkillExchange.SendKeys("marketing");
+
+            //Skill-Exchange tag
+            SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange"));
             SkillExchange.SendKeys(Keys.Enter);
-            ActiveOption.Click();
-            Save.Click();
+
+
+            //ShareSkillButton.Click();
+            //Thread.Sleep(3000);
+            //Title.SendKeys("QA Analyst");
+            //Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data.");
+            //CategoryDropDown.Click();
+            //programming_TechOpt.Click();
+            //SubCategoryDropDown.Click();
+            //qaOpt.Click();
+            //Tags.SendKeys("qa");
+            //Tags.SendKeys(Keys.Enter);
+            //ServiceTypeOption1.Click();
+            //LocationTypeOption2.Click();
+            //StartDateDropDown.SendKeys("01012023");
+            //EndDateDropDown.SendKeys("01012024");
+            //Day1.Click();
+            //SkillTradeOption2.Click();
+            //CreditAmount.SendKeys("10");
+            //ActiveOption.Click();
+            //Save.Click();
+
 
         }
+        internal void ServiceType()
+        {
+            //entering the service type
+            if (GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType") == "Hourly basis service")
+            {
+                ServiceTypeOption1.Click();
+            }
+            else
+            {
+                ServiceTypeOption2.Click();
+            }
+        }
+
+        internal void LocationType()
+        {
+            //entering the location type
+            if (GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType") == "Online")
+            {
+                LocationTypeOption2.Click();
+            }
+            else
+            {
+                LocationTypeOption1.Click();
+            }
+        }
+
+        //internal void EditShareSkill()
+        //{
+        //    //Type in Title
+        //    Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Title"));
+
+        //    //Click save button
+        //    SaveBtn.Click();
+            
+        //}
+        //public void EditShareSkill()
+        //{
+        //    Title.Clear();
+        //    Title.SendKeys("QA AnalystUpdate");
+        //    Description.Clear();
+        //    Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data. I also have experience in test automation.");
+        //    Tags.Click();
+        //    Tags.SendKeys("automation");
+        //    Tags.SendKeys(Keys.Enter);
+        //    ServiceTypeOption2.Click();
+        //    LocationTypeOption1.Click();
+        //    StartDateDropDown.SendKeys("01012024");
+        //    EndDateDropDown.SendKeys("01012025");
+        //    Day1.Click();
+        //    Day2.Click();
+        //    Day3.Click();
+        //    SkillTradeOption1.Click();
+        //    SkillExchange.Click();
+        //    SkillExchange.SendKeys("marketing");
+        //    SkillExchange.SendKeys(Keys.Enter);
+        //    ActiveOption.Click();
+        //    Save.Click();
+
+        //}
     }
 }

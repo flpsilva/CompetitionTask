@@ -1,5 +1,7 @@
 ﻿using Excel;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,27 @@ namespace MarsFramework.Global
     {
         //Initialise the browser
         public static IWebDriver driver { get; set; }
+        public static void InitializeBrowser(int Browser)
+        {
 
-        #region WaitforElement 
+            switch (Browser)
+            {
 
-        public static void wait(int time)
+                case 1:
+                    GlobalDefinitions.driver = new EdgeDriver();
+                    break;
+                case 2:
+                    GlobalDefinitions.driver = new ChromeDriver();
+                    GlobalDefinitions.driver.Manage().Window.Maximize();
+                    break;
+
+            }
+
+        }
+
+            #region WaitforElement 
+
+            public static void wait(int time)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(time);
 

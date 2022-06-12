@@ -16,27 +16,12 @@ namespace MarsFramework
         [Category("Sprint1")]
         internal class User : Base
         {
-            public static IWebDriver driver { get; set; }
-            ShareSkill shareSkillObj = new ShareSkill();
-
-
-            public void LoginFunction()
+            [Test, Order(1)]
+            public void LoginTest()
             {
-                IWebDriver driver = new EdgeDriver();
-                driver.Manage().Window.Maximize();
-                driver.Navigate().GoToUrl("http://localhost:5000/");
-                SignIn signin = new SignIn();
-                signin.LoginSteps(driver);
-
-            }
-
-
-            [Test]
-
-            public void ShareSkill()
-            {
-                Inititalize();
-                shareSkillObj.EnterShareSkill();
+                test = extent.StartTest("LoginTest");
+                SignIn _loginAssertion = new SignIn();
+                _loginAssertion.LoginAssertion();
             }
 
         }

@@ -1,12 +1,14 @@
 ﻿using MarsFramework.Global;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Threading;
 
 namespace MarsFramework.Pages
 {
-    class SignIn
+    class SignIn : GlobalDefinitions
     {
        
         public SignIn()
@@ -33,14 +35,34 @@ namespace MarsFramework.Pages
 
         #endregion
 
-        public void LoginSteps(IWebDriver driver)
+        public void LoginSteps()
         {
-            driver.Navigate().GoToUrl("http://localhost:5000");
+            //Initiate Excel file
+            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "SignIn");
+
             SignIntab.Click();
-            Email.SendKeys("flpsilva1992@gmail.com");
-            Password.SendKeys("mars447029");
+
+            Email.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Username"));
+
+            Password.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Password"));
+
             LoginBtn.Click();
-           
+
+            Thread.Sleep(2000);
+
+        }
+        internal void LoginAssertion()
+        {
+            IWebElement findMarsLogo = driver.FindElement(By.XPath("//a[contains(text(),'Mars Logo')]"));
+
+            if (findMarsLogo.Text == "Mars Logo")
+            {
+                Assert.Pass("Login successfull, test passed");
+            }
+            else
+            {
+                Assert.Fail("Login unsuccessfull, test failed");
+            }
         }
     }
 }
