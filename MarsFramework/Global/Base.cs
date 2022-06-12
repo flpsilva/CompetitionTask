@@ -1,6 +1,7 @@
 ﻿using MarsFramework.Config;
 using MarsFramework.Pages;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
@@ -16,7 +17,7 @@ namespace MarsFramework.Global
 
         public static int Browser = int.Parse(MarsResource.Browser);
         public static string ExcelPath = MarsResource.ExcelPath;
-        public static string ScreenshotPath = MarsResource.ScreenShotPath;
+        public static string ScreenshotPath = "C:/Users/dell/source/repos/CompetitionTask/your path/";
         public static string ReportPath = MarsResource.ReportPath;
         #endregion
 
@@ -40,7 +41,6 @@ namespace MarsFramework.Global
                     GlobalDefinitions.driver = new ChromeDriver();
                     GlobalDefinitions.driver.Manage().Window.Maximize();
                     break;
-
             }
 
             #region Initialise Reports
@@ -53,7 +53,7 @@ namespace MarsFramework.Global
             if (MarsResource.IsLogin == "true")
             {
                 SignIn loginobj = new SignIn();
-                loginobj.LoginSteps();
+                loginobj.LoginSteps(driver);
             }
             else
             {

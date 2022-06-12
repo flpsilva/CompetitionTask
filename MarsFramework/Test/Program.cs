@@ -12,37 +12,31 @@ namespace MarsFramework
 {
     public class Program
     {
-        public IWebDriver driver;
         [TestFixture]
         [Category("Sprint1")]
         internal class User : Base
-        { 
+        {
+            public static IWebDriver driver { get; set; }
             ShareSkill shareSkillObj = new ShareSkill();
-            [SetUp]
+
+
             public void LoginFunction()
             {
-                EdgeDriver driver = new EdgeDriver();
+                IWebDriver driver = new EdgeDriver();
                 driver.Manage().Window.Maximize();
-                SignIn signin = new SignIn();
-                signin.LoginSteps();
-
-            }
-
-
-            [Test, Order(1)]
-            public void Test(IWebDriver driver)
-            {
-                driver = new EdgeDriver();
                 driver.Navigate().GoToUrl("http://localhost:5000/");
-               
-                shareSkillObj.EnterShareSkill(driver);
+                SignIn signin = new SignIn();
+                signin.LoginSteps(driver);
 
             }
-            //[Test, Order(2)]
 
-            public void Update()
+
+            [Test]
+
+            public void ShareSkill()
             {
-
+                Inititalize();
+                shareSkillObj.EnterShareSkill();
             }
 
         }

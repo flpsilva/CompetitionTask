@@ -4,8 +4,9 @@ using System.Threading;
 
 namespace MarsFramework.Pages
 {
-    internal class ShareSkill
+    public class ShareSkill
     {
+        
         public ShareSkill()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
@@ -110,7 +111,7 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
         private IWebElement Save { get; set; }
 
-        public void EnterShareSkill(IWebDriver driver)
+        public void EnterShareSkill()
         {
             ShareSkillButton.Click();
             Thread.Sleep(3000);
@@ -135,7 +136,7 @@ namespace MarsFramework.Pages
 
         }
 
-        public void EditShareSkill(IWebDriver driver)
+        public void EditShareSkill()
         {
             Title.Clear();
             Title.SendKeys("QA AnalystUpdate");
