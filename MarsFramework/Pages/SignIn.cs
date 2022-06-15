@@ -48,7 +48,7 @@ namespace MarsFramework.Pages
 
             LoginBtn.Click();
 
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
 
         }
         internal void LoginAssertion()

@@ -13,13 +13,17 @@ namespace MarsFramework.Pages
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
         }
 
-        //Click on Manage Listings Link
+        //Click on Manage Listings Page
         [FindsBy(How = How.LinkText, Using = "Manage Listings")]
         private IWebElement manageListingsLink { get; set; }
 
         //View the listing
         [FindsBy(How = How.XPath, Using = "(//i[@class='eye icon'])[1]")]
         private IWebElement view { get; set; }
+
+        //Find Skill Listing
+        [FindsBy(How = How.XPath, Using = "//table/tbody/tr[1]/td[3]")]
+        private IWebElement TitleSkillListingElement { get; set; }
 
         //Delete the listing
         [FindsBy(How = How.XPath, Using = "//table[1]/tbody[1]")]
@@ -36,6 +40,10 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//div[@class='actions']")]
         private IWebElement clickActionsButton { get; set; }
 
+        //Popup
+        [FindsBy(How = How.XPath, Using = "//div[contains(text(),'QA AnalystUpdate has been deleted')]")]
+        private IWebElement popup { get; set; }
+
         internal void Listings()
         {
             //Populate the Excel Sheet
@@ -43,7 +51,7 @@ namespace MarsFramework.Pages
 
         }
 
-        internal void Visualize()
+        internal void Go_to_ManageListing_Page()
         {
            manageListingsLink.Click();
             Thread.Sleep(3);
@@ -62,6 +70,44 @@ namespace MarsFramework.Pages
         internal void ClickActionBtn()
         {
             clickActionsButton.Click();
+        }
+        internal void FindSkillListing()
+        {
+            
+            if (TitleSkillListingElement.Text == "QA Analyst")
+            {
+                Assert.Pass("Listing created successfully, test passed.");
+            }
+            else
+            {
+                Assert.Fail("Listing not found, test failed.");
+            }
+        }
+
+        internal void FindEditedSkillListing()
+        {
+         
+            if (TitleSkillListingElement.Text == "QA AnalystUpdate")
+            {
+                Assert.Pass("Listing record edited successfully, test passed.");
+            }
+            else
+            {
+                Assert.Fail("Listing not found, test failed.");
+            }
+        }
+
+        internal void ConfirmDeleteSkillListing()
+        {
+            if (popup.Text == "QA AnalystUpdate has been deleted")
+            {
+                Assert.Pass("Listing record edited successfully, test passed.");
+            }
+            else
+            {
+                Assert.Fail("Listing not found, test failed.");
+            }
+
         }
     }
 }

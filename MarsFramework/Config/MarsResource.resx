@@ -122,19 +122,19 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\ExcelData\TestData.xlsx</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\ExtentReports 2.0_files</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\MarsReports.html</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>your path</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\Screenshots</value>
   </data>
 </root>

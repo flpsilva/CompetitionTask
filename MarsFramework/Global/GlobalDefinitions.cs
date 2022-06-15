@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace MarsFramework.Global
             {
 
                 case 1:
-                    GlobalDefinitions.driver = new EdgeDriver();
+                    GlobalDefinitions.driver = new FirefoxDriver();
                     break;
                 case 2:
                     GlobalDefinitions.driver = new ChromeDriver();
@@ -36,7 +37,7 @@ namespace MarsFramework.Global
 
             #region WaitforElement 
 
-            public static void wait(int time)
+        public static void Wait(int time)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(time);
 

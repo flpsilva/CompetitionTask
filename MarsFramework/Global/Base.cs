@@ -15,9 +15,9 @@ namespace MarsFramework.Global
         #region To access Path from resource file
 
         public static int Browser = int.Parse(MarsResource.Browser);
-        public static string ExcelPath = "C:/Users/dell/source/repos/CompetitionTask/MarsFramework/ExcelData/TestData.xlsx";
+        public static string ExcelPath = MarsResource.ExcelPath;
         public static string ScreenshotPath = MarsResource.ScreenShotPath;
-        public static string ReportPath = @"C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\MarsReports.html";
+        public static string ReportPath = MarsResource.ReportPath;
         public string BaseUrl = "http://localhost:5000/";
         #endregion
 
@@ -34,17 +34,6 @@ namespace MarsFramework.Global
             InitializeBrowser(Browser);
             driver.Navigate().GoToUrl(BaseUrl);
 
-            //switch (Browser)
-            //{
-
-            //    case 1:
-            //        GlobalDefinitions.driver = new EdgeDriver();
-            //        break;
-            //    case 2:
-            //        GlobalDefinitions.driver = new ChromeDriver();
-            //        GlobalDefinitions.driver.Manage().Window.Maximize();
-            //        break;
-            //}
             
 
             #region Initialise Reports
@@ -62,7 +51,7 @@ namespace MarsFramework.Global
             else
             {
                 SignUp obj = new SignUp();
-                obj.register();
+                obj.Register();
             }
 
         }

@@ -8,16 +8,18 @@ namespace MarsFramework.Pages
 {
     public class ShareSkill
     {
-        
+
         public ShareSkill()
         {
+
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
+            //Initiate Excel file
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ShareSkill");
         }
 
         //Click on ShareSkill Button
         [FindsBy(How = How.LinkText, Using = "Share Skill")]
-        private IWebElement ShareSkillButton { get; set; }
+        private IWebElement ShareSkillBtn { get; set; }
 
         //Enter the Title in textbox
         [FindsBy(How = How.Name, Using = "title")]
@@ -91,10 +93,10 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//div[3]/div[3]/input[1]")]
         private IWebElement EndTimeDropDown { get; set; }
 
+        //Click on Skill Trade option
         [FindsBy(How = How.XPath, Using = "//div[8]/div[2]/div/div[1]/div/input")]
         private IWebElement SkillTradeOption1 { get; set; }
 
-        //Click on Skill Trade option
         [FindsBy(How = How.XPath, Using = "//div[8]/div[2]/div/div[2]/div/input")]
         private IWebElement SkillTradeOption2 { get; set; }
 
@@ -107,15 +109,21 @@ namespace MarsFramework.Pages
         private IWebElement CreditAmount { get; set; }
 
         //Click on Active/Hidden option
-        [FindsBy(How = How.XPath, Using = "//div[10]/div[2]/div/div[1]/div/input")]
+        [FindsBy(How = How.XPath, Using = "input[name='isActive'][value='true']")]
         private IWebElement ActiveOption { get; set; }
 
         //Click on Save button
         [FindsBy(How = How.XPath, Using = "//input[@value='Save']")]
         private IWebElement SaveBtn { get; set; }
 
-        public void EnterShareSkill()
+        internal void Go_to_ShareSkillPage()
         {
+            ShareSkillBtn.Click();
+        }
+        
+        public void AddShareSkill()
+        {
+             //Create the Title
             Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
             Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Description"));
 
@@ -153,26 +161,11 @@ namespace MarsFramework.Pages
             SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Skill-Exchange"));
             SkillExchange.SendKeys(Keys.Enter);
 
+            //Select Active
+            ActiveOption.Click();
 
-            //ShareSkillButton.Click();
-            //Thread.Sleep(3000);
-            //Title.SendKeys("QA Analyst");
-            //Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data.");
-            //CategoryDropDown.Click();
-            //programming_TechOpt.Click();
-            //SubCategoryDropDown.Click();
-            //qaOpt.Click();
-            //Tags.SendKeys("qa");
-            //Tags.SendKeys(Keys.Enter);
-            //ServiceTypeOption1.Click();
-            //LocationTypeOption2.Click();
-            //StartDateDropDown.SendKeys("01012023");
-            //EndDateDropDown.SendKeys("01012024");
-            //Day1.Click();
-            //SkillTradeOption2.Click();
-            //CreditAmount.SendKeys("10");
-            //ActiveOption.Click();
-            //Save.Click();
+            //Click save button
+            SaveBtn.Click();
 
 
         }
@@ -192,48 +185,47 @@ namespace MarsFramework.Pages
         internal void LocationType()
         {
             //entering the location type
-            if (GlobalDefinitions.ExcelLib.ReadData(2, "ServiceType") == "Online")
-            {
-                LocationTypeOption2.Click();
-            }
-            else
+            if (GlobalDefinitions.ExcelLib.ReadData(2, "LocationType") == "On-site")
             {
                 LocationTypeOption1.Click();
             }
+            else
+            {
+                LocationTypeOption2.Click();
+            }
         }
 
-        //internal void EditShareSkill()
-        //{
-        //    //Type in Title
-        //    Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Title"));
+        internal void EditShareSkill()
+        {
+            //Edit the Title
+            Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Title"));
+            //Edit Description
+            Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Description"));
+            //Add Tag
+            Tags.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Tags"));
+            Tags.SendKeys(Keys.Enter);
+            //Service Type Opt2
+            ServiceTypeOption2.Click();
+            //Lotation type2
+            LocationTypeOption2.Click();
+            //Update start date
+            StartDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Startdate"));
+            //Update end date
+            EndDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Enddate"));
+            //Edd Days 2,3 
+            Day2.Click();
+            Day3.Click();
+            //Skill Trade Opt2
+            SkillTradeOption2.Click();
+            SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Credit"));
+            SkillExchange.SendKeys(Keys.Enter);
+            //Select Active
+            ActiveOption.Click();
+            //Click save button
+            SaveBtn.Click();
 
-        //    //Click save button
-        //    SaveBtn.Click();
-            
-        //}
-        //public void EditShareSkill()
-        //{
-        //    Title.Clear();
-        //    Title.SendKeys("QA AnalystUpdate");
-        //    Description.Clear();
-        //    Description.SendKeys("I am a Test Analyst who implements test designs as real test cases, test processes, and test data. I also have experience in test automation.");
-        //    Tags.Click();
-        //    Tags.SendKeys("automation");
-        //    Tags.SendKeys(Keys.Enter);
-        //    ServiceTypeOption2.Click();
-        //    LocationTypeOption1.Click();
-        //    StartDateDropDown.SendKeys("01012024");
-        //    EndDateDropDown.SendKeys("01012025");
-        //    Day1.Click();
-        //    Day2.Click();
-        //    Day3.Click();
-        //    SkillTradeOption1.Click();
-        //    SkillExchange.Click();
-        //    SkillExchange.SendKeys("marketing");
-        //    SkillExchange.SendKeys(Keys.Enter);
-        //    ActiveOption.Click();
-        //    Save.Click();
 
-        //}
+        }
+
     }
 }
