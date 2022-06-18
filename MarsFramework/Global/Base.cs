@@ -2,25 +2,24 @@
 using MarsFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
 using RelevantCodes.ExtentReports;
 using System;
 using static MarsFramework.Global.GlobalDefinitions;
 
 namespace MarsFramework.Global
 {
-    class Base
+    public class Base
     {
+
         #region To access Path from resource file
 
         public static int Browser = int.Parse(MarsResource.Browser);
         public static string ExcelPath = MarsResource.ExcelPath;
         public static string ScreenshotPath = MarsResource.ScreenShotPath;
         public static string ReportPath = MarsResource.ReportPath;
-        public string BaseUrl = "http://localhost:5000/";
+        //public string BaseUrl = "http://localhost:5000/";
         #endregion
-
+        
         #region reports
         public static ExtentTest test;
         public static ExtentReports extent;
@@ -30,9 +29,11 @@ namespace MarsFramework.Global
         [SetUp]
         public void Inititalize()
         {
+
             //initialize browser
+
             InitializeBrowser(Browser);
-            driver.Navigate().GoToUrl(BaseUrl);
+            driver.Navigate().GoToUrl("http://localhost:5000/");
 
             
 
@@ -61,7 +62,8 @@ namespace MarsFramework.Global
         public void TearDown()
         {
             // Screenshot
-            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
+            String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");
+            //AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
             test.Log(LogStatus.Info, "Image example: " + img);
             // end test. (Reports)
             extent.EndTest(test);

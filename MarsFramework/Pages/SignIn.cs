@@ -3,14 +3,14 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Support.PageObjects;
+//using OpenQA.Selenium.Support.PageObjects;
+using SeleniumExtras.PageObjects;
 using System.Threading;
 
 namespace MarsFramework.Pages
 {
     class SignIn : GlobalDefinitions
     {
-       
         public SignIn()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
@@ -48,7 +48,7 @@ namespace MarsFramework.Pages
 
             LoginBtn.Click();
 
-            //Thread.Sleep(2000);
+            Thread.Sleep(2000);
 
         }
         internal void LoginAssertion()

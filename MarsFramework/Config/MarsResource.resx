@@ -129,12 +129,12 @@
     <comment>If true Login, else Register</comment>
   </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\ExtentReports 2.0_files</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\ExtentReports 2.0_files\extent.js</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\MarsReports.html</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\Screenshots</value>
+    <value>C:\Users\dell\source\repos\CompetitionTask\MarsFramework\TestReports\</value>
   </data>
 </root>

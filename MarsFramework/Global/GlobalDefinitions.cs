@@ -1,9 +1,9 @@
 ﻿using Excel;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,9 +11,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+
+
 namespace MarsFramework.Global
 {
-    class GlobalDefinitions
+    public class GlobalDefinitions
     {
         //Initialise the browser
         public static IWebDriver driver { get; set; }
@@ -27,7 +29,7 @@ namespace MarsFramework.Global
                     GlobalDefinitions.driver = new FirefoxDriver();
                     break;
                 case 2:
-                    GlobalDefinitions.driver = new ChromeDriver();
+                    GlobalDefinitions.driver = new EdgeDriver();
                     GlobalDefinitions.driver.Manage().Window.Maximize();
                     break;
 

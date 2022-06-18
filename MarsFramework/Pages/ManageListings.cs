@@ -1,12 +1,13 @@
 ﻿using MarsFramework.Global;
 using OpenQA.Selenium;
 using NUnit.Framework;
-using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support;
 using System.Threading;
+using SeleniumExtras.PageObjects;
 
 namespace MarsFramework.Pages
 {
-    internal class ManageListings
+    internal class ManageListings : GlobalDefinitions
     {
         public ManageListings()
         {
@@ -22,14 +23,14 @@ namespace MarsFramework.Pages
         private IWebElement view { get; set; }
 
         //Find Skill Listing
-        [FindsBy(How = How.XPath, Using = "//table/tbody/tr[1]/td[3]")]
+        [FindsBy(How = How.XPath, Using = "//div[1]/div[1]/table/tbody/tr[1]/td[3]")]
         private IWebElement TitleSkillListingElement { get; set; }
 
         //Delete the listing
-        [FindsBy(How = How.XPath, Using = "//table[1]/tbody[1]")]
+        [FindsBy(How = How.XPath, Using = "//td[8]/div/button[3]/i")]
         private IWebElement delete { get; set; }
         
-        [FindsBy(How = How.XPath, Using = "//button[@class='ui icon positive right labeled button']")]
+        [FindsBy(How = How.XPath, Using = "//html/body/div[2]/div/div[3]/button[2]")]
         private IWebElement confirmDeleteButton { get; set; }
 
         //Edit the listing
@@ -40,9 +41,9 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "//div[@class='actions']")]
         private IWebElement clickActionsButton { get; set; }
 
-        //Popup
-        [FindsBy(How = How.XPath, Using = "//div[contains(text(),'QA AnalystUpdate has been deleted')]")]
-        private IWebElement popup { get; set; }
+        //PagePopup
+        [FindsBy(How = How.XPath, Using = "//div[contains(text(),'QAEdited has been deleted')]")]
+        private IWebElement pagePopup { get; set; }
 
         internal void Listings()
         {
@@ -54,17 +55,21 @@ namespace MarsFramework.Pages
         internal void Go_to_ManageListing_Page()
         {
            manageListingsLink.Click();
-            Thread.Sleep(3);
+            Thread.Sleep(2);
         }
         internal void EditBtn()
         {
+            WaitHelper.ElementIsVisible(driver, "XPath", "(//i[@class='outline write icon'])[1]", 5);
             update.Click(); 
         }
         internal void DeleteBtn()
         {
+            WaitHelper.ElementIsVisible(driver, "Xpath", "//td[8]/div/button[3]/i", 5);
             delete.Click();
+            GlobalDefinitions.Wait(2);
             confirmDeleteButton.Click();
-            Thread.Sleep(2000);
+            WaitHelper.ElementIsVisible(driver, "Xpath", "//div[contains(text(),'QAEdited has been deleted')]", 5);
+
         }
 
         internal void ClickActionBtn()
@@ -87,7 +92,7 @@ namespace MarsFramework.Pages
         internal void FindEditedSkillListing()
         {
          
-            if (TitleSkillListingElement.Text == "QA AnalystUpdate")
+            if (TitleSkillListingElement.Text == "QAEdited")
             {
                 Assert.Pass("Listing record edited successfully, test passed.");
             }
@@ -99,9 +104,9 @@ namespace MarsFramework.Pages
 
         internal void ConfirmDeleteSkillListing()
         {
-            if (popup.Text == "QA AnalystUpdate has been deleted")
+            if (pagePopup.Text == "QAEdited has been deleted")
             {
-                Assert.Pass("Listing record edited successfully, test passed.");
+                Assert.Pass("Listing record deleted successfully, test passed.");
             }
             else
             {

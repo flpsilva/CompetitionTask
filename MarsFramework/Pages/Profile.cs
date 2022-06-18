@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support;
+using SeleniumExtras.PageObjects;
 
 namespace MarsFramework
 {

@@ -1,14 +1,14 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using System.Threading;
 using MarsFramework.Global;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.PageObjects;
 
 namespace MarsFramework.Pages
 {
-    public class ShareSkill
+    public class ShareSkill : GlobalDefinitions
     {
-
+        //public static IWebDriver driver { get; set; }
         public ShareSkill()
         {
 
@@ -64,11 +64,11 @@ namespace MarsFramework.Pages
         private IWebElement LocationTypeOption2 { get; set; }
 
         //Click on Start Date dropdown
-        [FindsBy(How = How.Name, Using = "startDate")]
+        [FindsBy(How = How.XPath, Using = "//div[7]/div[2]/div/div[1]/div[2]/input")]
         private IWebElement StartDateDropDown { get; set; }
 
         //Click on End Date dropdown
-        [FindsBy(How = How.Name, Using = "endDate")]
+        [FindsBy(How = How.XPath, Using = "//div[7]/div[2]/div/div[1]/div[4]/input")]
         private IWebElement EndDateDropDown { get; set; }
 
         //Storing the table of available days
@@ -109,7 +109,7 @@ namespace MarsFramework.Pages
         private IWebElement CreditAmount { get; set; }
 
         //Click on Active/Hidden option
-        [FindsBy(How = How.XPath, Using = "input[name='isActive'][value='true']")]
+        [FindsBy(How = How.XPath, Using = "//div[10]/div[2]/div/div[1]/div/input")]
         private IWebElement ActiveOption { get; set; }
 
         //Click on Save button
@@ -123,9 +123,11 @@ namespace MarsFramework.Pages
         
         public void AddShareSkill()
         {
-             //Create the Title
+            
+            //Create the Title
             Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Title"));
             Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Description"));
+            
 
             //Select Category and Subcategory dropdown list
             new SelectElement(CategoryDropDown).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Category"));
@@ -142,9 +144,11 @@ namespace MarsFramework.Pages
             LocationType();
 
             //Select start date
+            StartDateDropDown.Click();
             StartDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Startdate"));
 
             //Select end date
+            EndDateDropDown.Click();
             EndDateDropDown.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Enddate"));
 
             //Select day
@@ -163,9 +167,11 @@ namespace MarsFramework.Pages
 
             //Select Active
             ActiveOption.Click();
+            
 
             //Click save button
             SaveBtn.Click();
+            Thread.Sleep(2000);
 
 
         }
@@ -198,6 +204,7 @@ namespace MarsFramework.Pages
         internal void EditShareSkill()
         {
             //Edit the Title
+            Title.Clear();
             Title.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Title"));
             //Edit Description
             Description.SendKeys(GlobalDefinitions.ExcelLib.ReadData(3, "Description"));
@@ -217,12 +224,13 @@ namespace MarsFramework.Pages
             Day3.Click();
             //Skill Trade Opt2
             SkillTradeOption2.Click();
-            SkillExchange.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Credit"));
-            SkillExchange.SendKeys(Keys.Enter);
+            CreditAmount.SendKeys(GlobalDefinitions.ExcelLib.ReadData(2, "Credit"));
+            CreditAmount.SendKeys(Keys.Enter);
             //Select Active
             ActiveOption.Click();
             //Click save button
             SaveBtn.Click();
+            
 
 
         }
