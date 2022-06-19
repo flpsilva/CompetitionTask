@@ -19,8 +19,8 @@ namespace MarsFramework.Pages
         private IWebElement manageListingsLink { get; set; }
 
         //View the listing
-        [FindsBy(How = How.XPath, Using = "(//i[@class='eye icon'])[1]")]
-        private IWebElement view { get; set; }
+        [FindsBy(How = How.XPath, Using = "//td[8]/div/button[1]")]
+        private IWebElement serviceDetail { get; set; }
 
         //Find Skill Listing
         [FindsBy(How = How.XPath, Using = "//div[1]/div[1]/table/tbody/tr[1]/td[3]")]
@@ -37,20 +37,29 @@ namespace MarsFramework.Pages
         [FindsBy(How = How.XPath, Using = "(//i[@class='outline write icon'])[1]")]
         private IWebElement update { get; set; }
 
-        //Click on Yes or No
-        [FindsBy(How = How.XPath, Using = "//div[@class='actions']")]
+        //Click Active/Deactivate
+        [FindsBy(How = How.XPath, Using = "//td[7]/div/input")]
         private IWebElement clickActionsButton { get; set; }
 
         //PagePopup
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'QAEdited has been deleted')]")]
         private IWebElement pagePopup { get; set; }
 
-        internal void Listings()
-        {
-            //Populate the Excel Sheet
-            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "ManageListings");
+        //DisablePopupMessage
+        [FindsBy(How = How.XPath, Using = "//html/body/div[1]")]
+        private IWebElement disablePopup { get; set; }
 
-        }
+        //ActivatedPopupMessage
+        [FindsBy(How = How.XPath, Using = "//html/body/div[1]")]
+        private IWebElement activatedPopup { get; set; }
+
+        //ServiceTitle
+        [FindsBy(How = How.XPath, Using = "//h1/span")]
+        private IWebElement serviceTitle { get; set; }
+
+        //SeviceDescription
+        [FindsBy(How = How.XPath, Using = "//div[2]/div/div/div[1]/div/div/div/div[2]")]
+        private IWebElement serviceDescription { get; set; }
 
         internal void Go_to_ManageListing_Page()
         {
@@ -76,6 +85,12 @@ namespace MarsFramework.Pages
         {
             clickActionsButton.Click();
         }
+
+        internal void ViewServiceDetail()
+        {
+            serviceDetail.Click();
+        }
+
         internal void FindSkillListing()
         {
             
@@ -111,6 +126,57 @@ namespace MarsFramework.Pages
             else
             {
                 Assert.Fail("Listing not found, test failed.");
+            }
+
+        }
+
+        internal void ConfirmServiceDetail()
+        {
+            WaitHelper.ElementIsVisible(driver, "Xpath", "//h1/span", 5);
+            if (serviceTitle.Text == "QA Analyst")
+            {
+                
+                Assert.Pass("Title successfully expected, test passed.");
+
+            }
+            else
+            {
+                Assert.Fail("The title does not do match the expected description, test failed.");
+            }
+
+            if (serviceDescription.Text == "")
+            {
+                Assert.Pass("title successfully expected, test passed.");
+            }
+            else
+            {
+                Assert.Fail("The description does not do match the expected description, test failed");
+            }
+
+        }
+
+        internal void ConfirmDisableListing()
+        {
+            if (disablePopup.Text == "Service has been deactivated")
+            {
+                Assert.Pass("Service has been deactivated successfully, test passed.");
+            }
+            else
+            {
+                Assert.Fail("Service remained activated, test failed.");
+            }
+
+        }
+
+        internal void ConfirmActivatedListing()
+        {
+            if (activatedPopup.Text == "Service has been activated")
+            {
+                Assert.Pass("Service has been activated successfully, test passed.");
+            }
+            else
+            {
+                Assert.Fail("Service remained deactivated, test failed.");
             }
 
         }

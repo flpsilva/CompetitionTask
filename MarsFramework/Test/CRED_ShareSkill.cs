@@ -21,9 +21,9 @@ namespace MarsFramework
         {
 
             [Test, Order(1)]
-            public void Add_ShadreSkill_Test()
+            public void AddShadreSkill_Test()
             {
-                test = extent.StartTest("Add_ShareSkill_Test");
+                test = extent.StartTest("AddShareSkill_Test");
                 ShareSkill shareSkillObj = new ShareSkill();
                 shareSkillObj.Go_to_ShareSkillPage();
                 shareSkillObj.AddShareSkill();
@@ -33,8 +33,47 @@ namespace MarsFramework
                 Thread.Sleep(2000);
                 manageListingObj.FindSkillListing();
             }
-
             [Test, Order(2)]
+            public void ViewListedServiceDetails_Test()
+            {
+                test = extent.StartTest("ViewlistedServiceDetails_Test");
+                ManageListings manageListingObj = new ManageListings();
+                manageListingObj.Go_to_ManageListing_Page();
+                Thread.Sleep(1500);
+                manageListingObj.ViewServiceDetail();
+                //assertion
+                manageListingObj.ConfirmServiceDetail();
+
+            }
+            [Test, Order(3)]
+            public void DeactiveListing()
+            {
+                test = extent.StartTest("DeactiveListing");
+                ManageListings manageListingObj = new ManageListings();
+                manageListingObj.Go_to_ManageListing_Page();
+                Thread.Sleep(1500);
+                manageListingObj.ClickActionBtn();
+                Thread.Sleep(1500);
+                //DisableAssertion
+                manageListingObj.ConfirmDisableListing();
+
+            }
+
+            [Test, Order(4)]
+            public void ActiveListing()
+            {
+                test = extent.StartTest("ActiveListing");
+                ManageListings manageListingObj = new ManageListings();
+                manageListingObj.Go_to_ManageListing_Page();
+                Thread.Sleep(1500);
+                manageListingObj.ClickActionBtn();
+                Thread.Sleep(1500);
+                //ActiveAssertion
+                manageListingObj.ConfirmActivatedListing();
+
+            }
+
+            [Test, Order(5)]
             public void EditShareSkill_Test()
             {
                 test = extent.StartTest("EditShareSkill_Test");
@@ -50,7 +89,7 @@ namespace MarsFramework
                 manageListingObj.FindEditedSkillListing();
             }
 
-            [Test, Order(3)]
+            [Test, Order(6)]
             public void DeleteShareSkill_Test()
             {
                 test = extent.StartTest("DeleteShareSkill_Test");

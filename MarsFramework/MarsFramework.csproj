@@ -131,7 +131,6 @@
     <Compile Include="Pages\ShareSkill.cs" />
     <Compile Include="Pages\SignIn.cs" />
     <Compile Include="Pages\SignUp.cs" />
-    <Compile Include="Pages\Profile.cs" />
     <Compile Include="Test\CRED_ShareSkill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,10 +148,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\WebDriver.ChromeDriver.win32.2.41.0\content\chromedriver.exe">
-      <Link>chromedriver.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Config\XMLFile.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

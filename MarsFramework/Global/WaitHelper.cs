@@ -14,17 +14,17 @@ namespace MarsFramework.Global
             {
                 if (locator == "XPath")
                 {
-                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 2, seconds));
                     wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(locatorValue)));
                 }
                 if (locator == "CssSelector")
                 {
-                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 2, seconds));
                     wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(locatorValue)));
                 }
                 if (locator == "ClassName")
                 {
-                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+                    var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 2, seconds));
                     wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName(locatorValue)));
                 }
 
