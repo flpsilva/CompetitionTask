@@ -128,6 +128,7 @@
     <Compile Include="Global\GlobalDefinitions.cs" />
     <Compile Include="Global\WaitHelper.cs" />
     <Compile Include="Pages\ManageListings.cs" />
+    <Compile Include="Pages\Profile.cs" />
     <Compile Include="Pages\ShareSkill.cs" />
     <Compile Include="Pages\SignIn.cs" />
     <Compile Include="Pages\SignUp.cs" />
