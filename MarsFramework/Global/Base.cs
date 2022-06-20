@@ -1,7 +1,6 @@
 ﻿using MarsFramework.Config;
 using MarsFramework.Pages;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using RelevantCodes.ExtentReports;
 using System;
 using static MarsFramework.Global.GlobalDefinitions;
